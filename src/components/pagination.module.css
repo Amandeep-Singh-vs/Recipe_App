@@ -1,0 +1,20 @@
+.pageDiv{
+    height: 70px;
+    width: 100%;
+}
+
+.pageBtns{
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    margin: 10px;
+}
+
+.pageBtns:active{
+    background-color: rgba(21, 173, 33, 0.564) !important;
+}

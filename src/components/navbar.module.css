@@ -1,0 +1,9 @@
+.nav{
+    font-size: 2em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: rgb(47, 47, 93);
+    padding: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: rgb(32, 147, 32);
+}
