@@ -15,7 +15,7 @@ function FoodList({recipeData,setRecipeId}) {
           <FoodItem key={recipe.id} recipe={recipe} setRecipeId={setRecipeId}/>
         ))
       }
-      <Pagination totalItems={recipeData?.length} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
+      <Pagination totalItems={recipeData?.length} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setRecipeId={setRecipeId}/>
     </div>
   )
 }

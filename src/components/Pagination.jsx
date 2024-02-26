@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './pagination.module.css'
-function Pagination({totalItems,itemsPerPage,setCurrentPage,currentPage}) {
+function Pagination({totalItems,itemsPerPage,setCurrentPage,currentPage,setRecipeId}) {
     let pages = [];
     for(let i=1;i<=Math.ceil(totalItems/itemsPerPage);i++)
     {
@@ -10,7 +10,7 @@ function Pagination({totalItems,itemsPerPage,setCurrentPage,currentPage}) {
     <div className={styles.pageDiv}>
       {
         pages?.map((page,index)=>{
-            return <button key={index} className={page==currentPage ? `active ${styles.pageBtns}` : `${styles.pageBtns}`} onClick={()=>setCurrentPage(page)}>{page}</button>
+            return <button key={index} className={page==currentPage ? `active ${styles.pageBtns}` : `${styles.pageBtns}`} onClick={()=>{setCurrentPage(page); setRecipeId(null)}}>{page}</button>
         })
       }
     </div>

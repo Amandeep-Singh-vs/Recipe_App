@@ -7,8 +7,9 @@ function FoodDetails({recipeId}) {
     const [recipeDetail,setRecipeDetail] = useState({});
     const [isLoading,setIsLoading] = useState(true)
     useEffect(()=>{
-        if(!recipeId)
+        if(!recipeId || recipeId===null)
         {
+            setRecipeDetail({});
             return;
         }
         async function getRecipeData(){
@@ -27,7 +28,7 @@ function FoodDetails({recipeId}) {
     },[recipeId])
   return (
     <div>
-        {isLoading ? (<p className={styles.loader}>Loading Recipe Details...</p>) : (
+        {(isLoading && recipeDetail!={}) ? (<></>) : (
         <div className={styles.recipeCard}>
             <h1 className={styles.recipeName}>{recipeDetail?.title}</h1>
             <img className={styles.recipeImg} src={recipeDetail?.image} alt="" />
@@ -59,13 +60,13 @@ function FoodDetails({recipeId}) {
             <h2>Ingredients</h2>
             <ItemList recipeDetail={recipeDetail}/>
             <h2>Instructions</h2>
-            <div className={styles.recipeInstructions}>
+            {recipeDetail?.analyzedInstructions[0]===undefined?(<></>):(<div className={styles.recipeInstructions}>
                 <ol>
-                    {recipeDetail?.analyzedInstructions[0].steps.map((step)=>(
-                        <li>{step.step}</li>
+                    {recipeDetail?.analyzedInstructions[0]?.steps?.map((step)=>(
+                        <li key={Math.random()*Date.now()}>{step?.step}</li>
                     ))}
                 </ol>
-            </div>
+            </div>)}
       </div>
     )}
     </div>
