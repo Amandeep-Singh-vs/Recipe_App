@@ -2,7 +2,6 @@ import React, { useEffect, useState,useRef } from 'react'
 import styles from './search.module.css'
 const URL = 'https://api.spoonacular.com/recipes/complexSearch';
 const API_KEY = 'd0c71fb2a9684c2e94d03fef2704ac80'
-
 function Search({recipeData,setRecipeData}) {
     const [query,setQuery] = useState('pasta');
     const loadingRef = useRef(null);

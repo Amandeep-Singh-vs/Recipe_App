@@ -1,28 +1,33 @@
-import { useState } from 'react'
+import { useState,lazy, Suspense } from 'react'
+import {BrowserRouter as Router,Route,Routes} from 'react-router-dom'
 import Search from './components/Search'
-import FoodList from './components/FoodList'
 import Navbar from './components/Navbar'
+const FoodList  = lazy(()=>import('./components/FoodList'))
 import './App.css'
-import Container from './components/Container'
-import InnerContainer from './components/InnerContainer'
-import FoodDetails from './components/FoodDetails'
+const FoodDetails = lazy(()=>import('./components/FoodDetails'))
+import Loader from './components/Loader'
 function App() {
   const [recipeData,setRecipeData] = useState([]);
   const [recipeId,setRecipeId] = useState("");
   return (
-    <div className="App">
-      <Navbar/>
-      {/* Structural Components */}
-      <Search recipeData={recipeData} setRecipeData={setRecipeData}/>
-      <Container>
-        <InnerContainer>
-          <FoodList recipeData={recipeData} setRecipeId={setRecipeId}/>
-        </InnerContainer>
-        <InnerContainer>
-          <FoodDetails recipeId={recipeId}/>
-        </InnerContainer>
-      </Container>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar/>
+        {/* Structural Components */}
+        <Search recipeData={recipeData} setRecipeData={setRecipeData}/>
+        <Suspense fallback={<Loader/>}>
+          <Routes>
+            <Route exact path="/" element={
+              <FoodList recipeData={recipeData} setRecipeId={setRecipeId}/>
+            }/>
+            <Route path="/food-details/:id" element={
+              <FoodDetails recipeId={recipeId}/>
+            }/>
+          </Routes>
+        </Suspense>
+      </div>
+    </Router>
+    
   )
 }
 

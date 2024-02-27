@@ -1,5 +1,5 @@
 .itemContainer{
-    width: 300px;
+    width: 500px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(21, 173, 33, 0.564);
     margin: 20px;
@@ -8,7 +8,7 @@
 }
 
 .itemImage{
-    max-width: 100%;
+    width: 100%;
     height: auto;
 }
 

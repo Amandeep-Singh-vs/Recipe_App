@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './fooditem.module.css'
+import { NavLink } from 'react-router-dom'
 function FoodItem({recipe,setRecipeId}) {
   return (
     <div className={styles.itemContainer}>
@@ -8,7 +9,9 @@ function FoodItem({recipe,setRecipeId}) {
         <p className={styles.itemName}>{recipe.title}</p>
       </div>
       <div className={styles.buttonContainer}>
-        <button onClick={()=>{setRecipeId(recipe.id)}} className={styles.itemButton}>View Recipe</button>
+        <NavLink to={`/food-details/${recipe.id}`}>
+          <button onClick={()=>{setRecipeId(recipe.id)}} className={styles.itemButton}>View Recipe</button>
+        </NavLink>
       </div>
     </div>
   )

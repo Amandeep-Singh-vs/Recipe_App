@@ -7,17 +7,14 @@ function FoodDetails({recipeId}) {
     const [recipeDetail,setRecipeDetail] = useState({});
     const [isLoading,setIsLoading] = useState(true)
     useEffect(()=>{
-        if(!recipeId || recipeId===null)
+        if(!recipeId)
         {
-            setRecipeDetail({});
             return;
         }
         async function getRecipeData(){
             try {
                 const res = await fetch(`${recipeDetailUrl}?apiKey=${api_key}`);
-                console.log(res)
                 const data = await res.json();
-                console.log(data)
                 setRecipeDetail(data)
                 setIsLoading(false)
             } catch (error) {
@@ -28,45 +25,45 @@ function FoodDetails({recipeId}) {
     },[recipeId])
   return (
     <div>
-        {(isLoading && recipeDetail!={}) ? (<></>) : (
+        {(isLoading && recipeDetail!={}) ? (<p className={styles.loader}>Loading...</p>) : (
         <div className={styles.recipeCard}>
             <h1 className={styles.recipeName}>{recipeDetail?.title}</h1>
             <img className={styles.recipeImg} src={recipeDetail?.image} alt="" />
             <div className={styles.recipeDetails}>
                 <span>
-                    <strong>⏱️ {recipeDetail.readyInMinutes}</strong>
+                    <strong>⏱️ {recipeDetail?.readyInMinutes}</strong>
                 </span>
                 <span>
-                    <strong>👩‍👩‍👦‍👦 Serves {recipeDetail.servings} People</strong>
+                    <strong>👩‍👩‍👦‍👦 Serves {recipeDetail?.servings} People</strong>
                 </span>
                 <span>
                     <strong>
                     {
-                        recipeDetail.vegetarian ? "🥕 Vegetarian" : "🍗 Non-Vegetarian"
+                        recipeDetail?.vegetarian ? "🥕 Vegetarian" : "🍗 Non-Vegetarian"
                     }
                     </strong>
                 </span>
                 <span>
                     <strong>
                     {
-                        recipeDetail.vegan ? "🐄 Vegan"  : "🐖 Non-Vegan"
+                        recipeDetail?.vegan ? "🐄 Vegan"  : "🐖 Non-Vegan"
                     }
                     </strong>
                 </span>
             </div>
             <div>
-                <span>💲{(recipeDetail.pricePerServing/100).toPrecision(6)} per serving</span>
+                <span>💲{(recipeDetail?.pricePerServing/100).toPrecision(6)} per serving</span>
             </div>
             <h2>Ingredients</h2>
             <ItemList recipeDetail={recipeDetail}/>
             <h2>Instructions</h2>
-            {recipeDetail?.analyzedInstructions[0]===undefined?(<></>):(<div className={styles.recipeInstructions}>
+            <div className={styles.recipeInstructions}>
                 <ol>
-                    {recipeDetail?.analyzedInstructions[0]?.steps?.map((step)=>(
-                        <li key={Math.random()*Date.now()}>{step?.step}</li>
+                    {recipeDetail?.analyzedInstructions[0].steps.map((step)=>(
+                        <li key={Math.random()*Date.now()}>{step.step}</li>
                     ))}
                 </ol>
-            </div>)}
+            </div>
       </div>
     )}
     </div>

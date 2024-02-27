@@ -1,6 +1,10 @@
 .pageDiv{
     height: 70px;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .pageBtns{
